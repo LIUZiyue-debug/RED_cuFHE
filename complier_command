@@ -1,0 +1,29 @@
+nvcc multigpu_arithmetic_example.cu -Xcompiler -fopenmp -lredcufhe -Lhome/alexliu/ドキュメント/REDcuFHE/include/ -o test
+
+nvcc multigpu_gates_example01.cu -Xcompiler -fopenmp -lredcufhe -Lhome/alexliu/ドキュメント/REDcuFHE/include/ -o test_gate
+
+nvcc comparsion.cu -Xcompiler -fopenmp -lredcufhe -Lhome/alexliu/ドキュメント/REDcuFHE/include/ -o test_cp
+
+nvcc project.cu -Xcompiler -fopenmp -lredcufhe -Lhome/alexliu/ドキュメント/REDcuFHE/include/ -o project
+
+nvcc -o your_program_name your_code.cu -L/path/to/static/libs -lstatic_library_name -Xlinker --whole-archive -lstdc++ -lgcc -static -Xlinker --no-whole-archive
+
+nvcc project_2.cu -Xcompiler -fopenmp -lredcufhe -Lhome/alexliu/ドキュメント/REDcuFHE/include/ --compiler-options "-static" -Xlinker --whole-archive -Xlinker --no-whole-archive -o project
+
+nvcc project_2.cu -Xcompiler -fopenmp -lredcufhe -L/home/alexliu/ドキュメント/REDcuFHE/lib/ -I/home/alexliu/ドキュメント/REDcuFHE/include/ --compiler-options "-static-libgcc -static-libstdc++" -Xlinker -rpath=\$ORIGIN -o project
+
+
+
+//bash script
+
+#!/bin/bash
+
+while true ; do
+	./test01
+	exit_status=$?
+	if [ $exit_status -ne 0 ]; then
+		echo "Error occurred, exiting."
+		break
+	fi
+	
+done
